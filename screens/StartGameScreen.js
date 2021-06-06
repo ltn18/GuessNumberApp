@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -25,6 +25,9 @@ const StartGameScreen = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState();
+  const [buttonWidth, setButtonWidth] = useState(
+    Dimensions.get("window").width / 4
+  );
 
   const numberInputHandler = (inputText) => {
     // regex ~ android comma and dot handler
@@ -35,6 +38,20 @@ const StartGameScreen = (props) => {
     setEnteredValue("");
     setConfirmed(false);
   };
+
+  // avoid 2 updateLayout running same time
+  // cleaner version to recalculate dimensions
+  useEffect(() => {
+    const updateLayout = () => {
+      setButtonWidth(Dimensions.get("window").width / 4);
+    };
+
+    Dimensions.addEventListener("change", updateLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  }, []);
 
   const confirmInputHandler = () => {
     const chosenNumber = parseInt(enteredValue);
@@ -138,7 +155,8 @@ const styles = StyleSheet.create({
   },
   button: {
     // width: 100,
-    width: Dimensions.get("window").width / 4,
+    // width: Dimensions.get("window").width / 4,
+    width: buttonWidth,
   },
   input: {
     width: 50,
