@@ -5,9 +5,13 @@ Guess Number App is an interactive game for kids made with React Native. This ga
 
 ## Game screens
 ### Start Game
-
+![](https://github.com/ltn18/GuessNumberApp/tree/master/public/photos/main.jpg)
+![](https://github.com/ltn18/GuessNumberApp/tree/master/public/photos/main-choose.jpg)
 ### Game Play
 
 ### Game Over
 
 ## Demos
+
+## Contributors
+Lam Nguyen (ltn18)
